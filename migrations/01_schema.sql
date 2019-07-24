@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS guest_reviews;
 DROP TABLE IF EXISTS property_reviews;
 DROP TABLE IF EXISTS reservations;
-DROP TABLE IF EXISTS properties;
 DROP TABLE IF EXISTS rates;
+DROP TABLE IF EXISTS properties;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -54,6 +54,6 @@ CREATE TABLE guest_reviews (
   message TEXT,
   rating SMALLINT,
   user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  owener_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   reservation_id INT NOT NULL REFERENCES reservations(id) ON DELETE CASCADE
 );

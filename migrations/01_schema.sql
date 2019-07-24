@@ -32,13 +32,13 @@ CREATE TABLE properties (
 );
 
 
--- CREATE TABLE rates (
---   id SERIAL PRIMARY KEY,
---   start_date DATE,
---   end_date DATE,
---   rate INTEGER,
---   property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE
--- );
+CREATE TABLE rates (
+  id SERIAL PRIMARY KEY,
+  start_date DATE,
+  end_date DATE,
+  rate INTEGER,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE
+);
 
 CREATE TABLE reservations (
   id SERIAL PRIMARY KEY,
@@ -57,11 +57,11 @@ CREATE TABLE property_reviews (
   property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE
 );
 
--- CREATE TABLE guest_reviews (
---   id SERIAL PRIMARY KEY,
---   message TEXT,
---   rating INTEGER,
---   guest_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
---   owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
---   reservation_id INT NOT NULL REFERENCES reservations(id) ON DELETE CASCADE
--- );
+CREATE TABLE guest_reviews (
+  id SERIAL PRIMARY KEY,
+  message TEXT,
+  rating INTEGER,
+  guest_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  reservation_id INT NOT NULL REFERENCES reservations(id) ON DELETE CASCADE
+);

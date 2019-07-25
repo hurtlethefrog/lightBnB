@@ -24,7 +24,6 @@ const getUserWithEmail = function(email) {
   return pool.query(getUserWithEmailQuery, [email])
   .then(res => {
     if(res.rows) {
-      console.log(res.rows[0])
     return res.rows[0]
     } else {
       return null
@@ -49,7 +48,6 @@ const getUserWithId = function(id) {
   return pool.query(getUserWithIdQuery, [id])
   .then(res => {
     if(res.rows) {
-      console.log(res.rows[0])
     return res.rows[0]
     } else {
       return null
@@ -96,7 +94,24 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  const getAllReservationsQuery = `
+  SELECT * FROM reservations
+  JOIN users ON guest_id = users.id
+  JOIN properties ON properties.id = property_id
+  WHERE users.id = $1
+  LIMIT $2
+  ;`;
+  return pool.query(getAllReservationsQuery, [guest_id, limit])
+  .then(res => {
+    if(res.rows) {
+    return res.rows
+    } else {
+      return null
+    }
+  })
+  .catch(err => {
+    console.log(err)
+  });
 }
 exports.getAllReservations = getAllReservations;
 
